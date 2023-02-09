@@ -1,12 +1,11 @@
 import '@/styles/globals.css'
+import "semantic-ui-css/semantic.min.css";
+import Footer from "../src/component/Footer";
+import Top from "../src/component/Top";
 
 // export default function App({ Component, pageProps }) {
 //   return <Component {...pageProps} />
 // }
-
-import Footer from "../src/component/Footer";
-import Top from "../src/component/Top";
-
 
 export default function App({ Component, pageProps }) {
 

@@ -22,45 +22,71 @@ export default function Home() {
       </Head>
 
 
+      <div style={{
+        display: "flex",
+        border: "1px solid white",
+        justifyContent: "left"
+      }}>
 
-
-      <div
-        style={{
-          width: "30%",
-          height: "800px",
-          display: "flex",
-          paddingTop: 10,
-          backgroundColor: "#154360",
-          border: "1px solid white",
-          justifyContent: "space-between"
-
-        }}
-      >
-        <div style={{ display: "flex", justifyContent: "left" }}>
-          <div style={{
+        <div
+          style={{
+            width: "400px",
+            height: "2000px",
+            display: "flex",
             paddingTop: 10,
-            paddingLeft: 30,
-            padding: 10,
-            // border: "2px dashed red",
-          }}>
+            backgroundColor: "#154360",
+            border: "2px dashed red",
+            justifyContent: "left"
+
+          }}
+        >
+
+          <div>
+            <div style={{
+              // flex: "600px 0 0",
+              padding: 20,
+              fontWeight: "bold",
+              fontSize: 14,
+              color: "#FFFFFF",
+              // border: "2px dashed red",
+              textAlign: "center",
+            }}>
+              API Key 발급 방법
+
+            </div>
+
+
+            <div style={{
+              // flex: "600px 0 0",
+              padding: 20,
+              fontWeight: "bold",
+              fontSize: 20,
+              color: "#FFFFFF",
+              // border: "2px dashed red",
+              textAlign: "center",
+            }}>
+              <Input placeholder='API Key 입력' />
+
+            </div>
 
           </div>
-          <div style={{
-            flex: "600px 0 0",
-            padding: 20,
-            fontWeight: "bold",
-            fontSize: 30,
-            color: "#FF6800",
-            // border: "2px dashed red",
-          }}>
-            좌측 메뉴
-          </div>
+
+
+
         </div>
+
+
+
+        <div style={{
+          width: "100%",
+          border: "2px dashed red",
+          justifyContent: "left"
+
+        }}>
+          body content
+        </div>
+
       </div>
-
-
-
-
 
 
 

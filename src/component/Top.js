@@ -42,7 +42,7 @@ export default function Top() {
                     </div>
                     <div style={{
                         flex: "600px 0 0",
-                        padding: 20,
+                        padding: 24,
                         fontWeight: "bold",
                         fontSize: 20,
                         color: "#212F3D",
@@ -58,11 +58,8 @@ export default function Top() {
                     }}
                 >
                     <>
-                        <Label>
-                            <Icon name='user' />
-                        </Label>
                         <Label as='a' image>
-                            <Icon name='sign-out alternate' /> 로그아웃
+                            <Icon name='setting' /> Setting
                         </Label>
                     </>
                 </div>
