@@ -1,0 +1,14 @@
+.logo_image {
+    float: "left";
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+.main_title {
+    line-height: "50px";
+    padding: 10px;
+    font-weight: bold;
+    font-size: 36px;
+    color: #FF6800;
+    /* border: 1px solid yellow; */
+}

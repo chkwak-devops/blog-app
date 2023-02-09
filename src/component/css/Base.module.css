@@ -1,0 +1,26 @@
+.exlayout{
+	width: 100%;
+}
+.exlayout .gnb{
+	padding: 15px;
+	background-color: skyblue;
+}
+.exlayout .main{
+	background-color: white;
+}
+.exlayout .main:after{ clear: both; display: block; content: '' }
+
+.exlayout .main .lnb{
+	float: left;
+	width: 400px;
+	height: 900px;
+	background-color: orange;
+}
+.exlayout .main .content{
+	float: left;
+	width: 00px;
+}
+.exlayout .footer{
+	padding: 10px;
+	background-color: #ddd;
+}
