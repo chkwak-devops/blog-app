@@ -1,3 +1,13 @@
+
+.fill_window {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+
 .exlayout{
 	width: 100%;
 }
@@ -24,3 +34,11 @@
 	padding: 10px;
 	background-color: #ddd;
 }
+
+
+
+.container__table {
+    height: 300px;
+    /* height: auto; */
+    overflow-y: scroll;  /* or auto */
+  }

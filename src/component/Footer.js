@@ -2,9 +2,9 @@ export default function Footer() {
     return (
         <div
             style={{
-                marginTop: 40,
-                padding: "40px 0",
-                borderTop: "1px solid #999",
+                marginTop: 20,
+                padding: "10px 0px",
+                borderTop: "1px solid #EBEDEF",
                 textAlign: "center",
             }}
         >
