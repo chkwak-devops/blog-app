@@ -115,7 +115,7 @@ export default function Home() {
 
         <div style={{
           padding: 50,
-          width: "90%",
+          width: "60%",
           // border: "2px dashed red",
           backgroundColor: "#FEF9E7",
           justifyContent: "left"
@@ -124,73 +124,157 @@ export default function Home() {
 
           <div className={baseStyles.container__table} >
 
-            <Table celled selectable striped structured style={{ borderCollapse: "collapse", width: "100%", whiteSpace: "nowrap", border: "1px solid #ddd" }}>
-              <Table.Header style={{ position: "sticky", top: 0, zIndex: 10 }}>
+            <Table celled selectable striped structured style={{
+              borderCollapse: "collapse",
+              // whiteSpace: "nowrap",
+              // width: "100%",
+              width: 2000,
+              border: "1px solid #ddd"
+            }}>
+              <Table.Header style={{ position: "sticky", top: 0, zIndex: 11 }}>
                 <Table.Row>
 
-                  <Table.HeaderCell structured style={{ padding: "0px", position: "sticky", left: 0, zIndex: 20, }}>
+                  <Table.HeaderCell style={{ width: 100, position: "sticky", left: 0, zIndex: 8 }}></Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 500 }}>Name</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 200 }}>Status333</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
 
-                    <Table celled selectable striped structured style={{ border: "0px solid #ddd", width: "100%", whiteSpace: "normal", tableㅣayout: "fixed" }}>
-                      <Table.Body>
-                        <Table.Row>
-
-                          <Table.HeaderCell style={{ width: "25%" }}>Notes</Table.HeaderCell>
-                          <Table.HeaderCell style={{ width: "25%" }}>Name</Table.HeaderCell>
-                          <Table.HeaderCell style={{ width: "25%" }}>Status</Table.HeaderCell>
-                          <Table.HeaderCell style={{ width: "25%" }}>Notes</Table.HeaderCell>
-
-                        </Table.Row>
-                      </Table.Body>
-                    </Table>
-
-                  </Table.HeaderCell>
-
-
-                  <Table.HeaderCell >Notes11111</Table.HeaderCell>
-                  <Table.HeaderCell>Name22222222222</Table.HeaderCell>
-                  <Table.HeaderCell>Status333</Table.HeaderCell>
-                  <Table.HeaderCell>Notes444</Table.HeaderCell>
-
-                  <Table.HeaderCell>Name</Table.HeaderCell>
-                  <Table.HeaderCell>Status</Table.HeaderCell>
-                  <Table.HeaderCell>Notes</Table.HeaderCell>
-
-                  <Table.HeaderCell>Name</Table.HeaderCell>
-                  <Table.HeaderCell>Status</Table.HeaderCell>
-                  <Table.HeaderCell>Notes</Table.HeaderCell>
-
-                  <Table.HeaderCell>Name</Table.HeaderCell>
-                  <Table.HeaderCell>Status</Table.HeaderCell>
-                  <Table.HeaderCell>Notes</Table.HeaderCell>
-
-                  <Table.HeaderCell>Name</Table.HeaderCell>
-                  <Table.HeaderCell>Status</Table.HeaderCell>
-                  <Table.HeaderCell>Notes</Table.HeaderCell>
-                  <Table.HeaderCell>Notes</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Status333</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Status333</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Status333</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Status333</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Status333</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Status333</Table.HeaderCell>
+                  <Table.HeaderCell style={{ width: 100 }}>Notes444</Table.HeaderCell>
 
 
                 </Table.Row>
               </Table.Header>
 
               <Table.Body>
-
                 <Table.Row>
-                  <Table.Cell structured style={{ padding: "0px", position: "sticky", left: 0, zIndex: 10 }}>
-
-                    <Table celled selectable striped structured style={{ border: "0px solid #ddd", width: "100%", tableㅣayout: "fixed" }}>
-                      <Table.Body>
-                        <Table.Row>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "255", whiteSpace: "nowrap", wordBreak: "break-all" }} negative>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                        </Table.Row>
-                      </Table.Body>
-                    </Table>
-
-                  </Table.Cell>
-                  <Table.Cell>Unknown1</Table.Cell>
+                  <Table.Cell style={{ position: "sticky", left: 0, zIndex: 8 }}>Unknown1</Table.Cell>
+                  <Table.Cell negative style={{}}>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
                   <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell style={{ position: "sticky", left: 0, zIndex: 8 }}>Unknown1</Table.Cell>
+                  <Table.Cell negative style={{}}>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell style={{ position: "sticky", left: 0, zIndex: 8 }}>Unknown1</Table.Cell>
+                  <Table.Cell negative style={{}}>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell style={{ position: "sticky", left: 0, zIndex: 8 }}>Unknown1</Table.Cell>
+                  <Table.Cell negative style={{}}>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell style={{ position: "sticky", left: 0, zIndex: 8 }}>Unknown1</Table.Cell>
+                  <Table.Cell negative style={{}}>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell style={{ position: "sticky", left: 0, zIndex: 8 }}>Unknown1</Table.Cell>
+                  <Table.Cell negative style={{}}>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                  <Table.Cell>No Name Specified</Table.Cell>
+                  <Table.Cell>Unknown</Table.Cell>
+                  <Table.Cell negative>None</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell style={{ position: "sticky", left: 0, zIndex: 8 }}>Unknown1</Table.Cell>
+                  <Table.Cell negative style={{}}>None</Table.Cell>
                   <Table.Cell>No Name Specified</Table.Cell>
                   <Table.Cell>Unknown</Table.Cell>
                   <Table.Cell negative>None</Table.Cell>
@@ -208,148 +292,6 @@ export default function Home() {
                   <Table.Cell negative>None</Table.Cell>
                 </Table.Row>
 
-
-
-
-                <Table.Row>
-                  <Table.Cell structured style={{ padding: "0px", position: "sticky", left: 0, zIndex: 10 }}>
-
-                    <Table celled selectable striped structured style={{ border: "0px solid #ddd", width: "100%", tableㅣayout: "fixed" }}>
-                      <Table.Body>
-                        <Table.Row>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "255", whiteSpace: "nowrap", wordBreak: "break-all" }} negative>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                        </Table.Row>
-                      </Table.Body>
-                    </Table>
-
-                  </Table.Cell>
-                  <Table.Cell>Unknown1</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                </Table.Row>
-
-
-
-                <Table.Row>
-                  <Table.Cell structured style={{ padding: "0px", position: "sticky", left: 0, zIndex: 10 }}>
-
-                    <Table celled selectable striped structured style={{ border: "0px solid #ddd", width: "100%", tableㅣayout: "fixed" }}>
-                      <Table.Body>
-                        <Table.Row>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "255", whiteSpace: "nowrap", wordBreak: "break-all" }} negative>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                        </Table.Row>
-                      </Table.Body>
-                    </Table>
-
-                  </Table.Cell>
-                  <Table.Cell>Unknown1</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                </Table.Row>
-
-
-                <Table.Row>
-                  <Table.Cell structured style={{ padding: "0px", position: "sticky", left: 0, zIndex: 10 }}>
-
-                    <Table celled selectable striped structured style={{ border: "0px solid #ddd", width: "100%", tableㅣayout: "fixed" }}>
-                      <Table.Body>
-                        <Table.Row>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "255", whiteSpace: "nowrap", wordBreak: "break-all" }} negative>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                        </Table.Row>
-                      </Table.Body>
-                    </Table>
-
-                  </Table.Cell>
-                  <Table.Cell>Unknown1</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                </Table.Row>
-
-
-
-                <Table.Row>
-                  <Table.Cell structured style={{ padding: "0px", position: "sticky", left: 0, zIndex: 10 }}>
-
-                    <Table celled selectable striped structured style={{ border: "0px solid #ddd", width: "100%", tableㅣayout: "fixed" }}>
-                      <Table.Body>
-                        <Table.Row>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "255", whiteSpace: "nowrap", wordBreak: "break-all" }} negative>1000<br />100</Table.Cell>
-                          <Table.Cell style={{ width: "25%", whiteSpace: "nowrap", wordBreak: "break-all" }}>1000<br />100</Table.Cell>
-                        </Table.Row>
-                      </Table.Body>
-                    </Table>
-                  </Table.Cell>
-                  <Table.Cell>Unknown1</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                  <Table.Cell>No Name Specified</Table.Cell>
-                  <Table.Cell>Unknown</Table.Cell>
-                  <Table.Cell negative>None</Table.Cell>
-                </Table.Row>
 
 
 
