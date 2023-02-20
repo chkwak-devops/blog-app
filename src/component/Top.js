@@ -2,69 +2,75 @@
 // import Gnb from "./Gnb";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-import baseStyles from "/src/component/css/Base.module.css";
-import { Button, Form, Divider, Input, Label, Image, Icon } from "semantic-ui-react";
+import Head from "next/head";
+import {
+  Button,
+  Form,
+  Divider,
+  Input,
+  Label,
+  Image,
+  Icon,
+} from "semantic-ui-react";
 
 export default function Top() {
-    const router = useRouter();
+  const router = useRouter();
 
-    useEffect(() => {
-    }, []);
+  useEffect(() => {}, []);
 
-    return (
-        <div>
-
-
-            <div
-                style={{
-                    display: "flex",
-                    paddingTop: 10,
-                    backgroundColor: "#EBEDEF",
-                    // borderRadius: 5,
-                    border: "1px solid white",
-                    justifyContent: "space-between"
-
-                }}
-            >
-                <div style={{ display: "flex", justifyContent: "left" }}>
-                    <div style={{
-                        paddingTop: 10,
-                        paddingLeft: 30,
-                        padding: 10,
-                        // border: "2px dashed red",
-                    }}>
-
-                    </div>
-                    <div style={{
-                        flex: "600px 0 0",
-                        padding: 24,
-                        fontWeight: "bold",
-                        fontSize: 20,
-                        color: "#212F3D",
-                        // border: "2px dashed red",
-                    }}>
-                        ChatGPT Blog Page Generator
-                    </div>
-                </div>
-                <div
-                    style={{
-                        padding: 20,
-                        // border: "2px dashed red",
-                    }}
-                >
-                    <>
-                        <Label as='a' image>
-                            <Icon name='time' /> time
-                        </Label>
-
-                        <Label as='a' image>
-                            <Icon name='setting' /> Setting
-                        </Label>
-                    </>
-                </div>
-            </div>
-            {/* <Gnb /> */}
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          paddingTop: 10,
+          backgroundColor: "#566573",
+          // borderRadius: 5,
+          // border: "2px dashed red",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "left" }}>
+          <div
+            style={{
+              //   flex: "600px 0 0",
+              padding: 16,
+              fontWeight: "bold",
+              fontSize: 28,
+              color: "orange",
+              //   border: "2px dashed red",
+            }}
+          >
+            ChatGPT
+          </div>
+          <div
+            style={{
+              paddingTop: 20,
+              fontWeight: "bold",
+              fontSize: 20,
+              color: "#FFFFFF",
+            }}
+          >
+            Blog Page Generator
+          </div>
         </div>
-    );
+        <div
+          style={{
+            padding: "20px 20px 10px 10px",
+            // border: "2px dashed red",
+          }}
+        >
+          <>
+            <Label as="a" image>
+              <Icon name="time" /> 사용시간
+            </Label>
+            <Label as="a" image>
+              <Icon name="setting" /> Setting
+            </Label>
+          </>
+        </div>
+      </div>
+      {/* <Gnb /> */}
+    </div>
+  );
 }
