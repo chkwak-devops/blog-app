@@ -33,9 +33,13 @@ export default function Main() {
     const [isLoading, setIsLoading] = useState(true);
     const [chatGPTResult, setChatGPTResult] = useState();
     const [chatGPTQuery, setchatGPTQuery] = useState();
-    const [valueCategory, setValueCategory] = useState('');
-    const [valueTopic, setValueTopic] = useState('');
+    const [valueCategory, setValueCategory] = useState('travel');
+    const [valueTopic, setValueTopic] = useState('Top 10 Restaurants you must visit when traveling to New York');
     const [valueReqQuery, setValueReqQuery] = useState('');
+
+    const [valueKorQuestion, setValueKorQuestion] = useState('');
+    const [valueEngQuestion, setValueEngQuestion] = useState('');
+
 
     const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -116,6 +120,45 @@ export default function Main() {
         element.download = fileName;
         document.body.appendChild(element); // FireFox
         element.click();
+
+    }
+
+
+
+
+    const handletranslateEng = async () => {
+
+        try {
+            const req = await axios.post(
+                // "https://openapi.naver.com/v1/papago/n2mt",
+                "/v1/papago/n2mt",
+                {
+                    source: "ko",
+                    target: "en",
+                    text: valueKorQuestion
+                },
+                {
+                    headers: {
+                        // "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                        "X-Naver-Client-Id": "JWUPX5FM2NNPafV8hONr",
+                        "X-Naver-Client-Secret": "LnJapCVcZn",
+                    },
+                }
+            );
+
+            console.log("----------------");
+            console.log(req);
+            console.log("----------------");
+
+
+            setValueEngQuestion(req.data.message.result.translatedText);
+
+
+        } catch (error) {
+            console.log(error);
+            alert("오류가 발생하였습니다.");
+        }
+
 
     }
 
@@ -204,6 +247,36 @@ export default function Main() {
                         padding: 20,
                     }}
                 >
+
+                    <Form>
+                        <Form.Group widths='equal'>
+                            <Form.Field
+                                id='form-kor-question'
+                                width="100%"
+                                control={Input}
+                                label='한글 질문'
+                                placeholder='한글 질문 입력'
+                                onChange={(e) => setValueKorQuestion(e.currentTarget.value)}
+                                value={valueKorQuestion}
+                            />
+                        </Form.Group>
+                    </Form>
+                    <Form>
+                        <Form.Group widths='equal'>
+                            <Form.Field
+                                id='form-eng-question'
+                                width="100%"
+                                control={Input}
+                                label='영문 번역'
+                                placeholder='영문으로 번역됩니다'
+                                value={valueEngQuestion}
+                            />
+                        </Form.Group>
+                    </Form>
+
+                    <Segment>
+                        <Button onClick={handletranslateEng}> 영문 번역(파파고)</Button>
+                    </Segment>
 
 
                     <Form>
