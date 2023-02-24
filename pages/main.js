@@ -25,11 +25,13 @@ import baseStyles from "/src/component/css/Base.module.css";
 import * as backendAPI from "/src/component/BackendAPI";
 import * as commonUtil from "/src/component/Common";
 
+import Top from "../src/component/Top";
 
 
-// 
 
-
+export const setOpenSideBarAction = () => {
+    setOpenSideBar(true);
+}
 
 
 
@@ -44,11 +46,15 @@ export default function Main() {
     const [valueTopic, setValueTopic] = useState('Top 1 Restaurants you must visit when traveling to Tokyo');
     const [valueReqQuery, setValueReqQuery] = useState('');
 
-    const [visible, setVisible] = useState(true);
-
+    const [openSideBar, setOpenSideBar] = useState(false);
 
     // const [valueKorQuestion, setValueKorQuestion] = useState('');
     // const [valueEngQuestion, setValueEngQuestion] = useState('');
+
+
+
+
+
 
 
     const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
@@ -161,16 +167,14 @@ Add a summary of the entire article at the beginning of the blog post.`;
     useEffect(() => {
         setIsLoading(false);
 
+
+
     }, []);
 
 
     return (
         <>
-
-
-
-
-
+            <Top />
             {isLoading && (
                 <div style={{ padding: "300px 0" }}>
                     <Dimmer active>
@@ -191,9 +195,9 @@ Add a summary of the entire article at the beginning of the blog post.`;
                         direction='right'
                         icon='labeled'
                         inverted
-                        onHide={() => setVisible(false)}
+                        onHide={() => setOpenSideBar(false)}
                         vertical
-                        visible={visible}
+                        visible={openSideBar}
                         width='wide'
                     >
                         <Menu.Item as='a' header>
@@ -239,7 +243,7 @@ Add a summary of the entire article at the beginning of the blog post.`;
                                         id='form-category'
                                         width="100%"
                                         control={Input}
-                                        label='카테고리'
+                                        label="카테고리"
                                         placeholder='카테고리 유형 입력(ex : travel)'
                                         onChange={(e) => setValueCategory(e.currentTarget.value)}
                                         value={valueCategory}
@@ -285,7 +289,7 @@ Add a summary of the entire article at the beginning of the blog post.`;
 
                             <Segment>
                                 <Button onClick={() => handleDownloadChatGPT()}> 파일 다운로드 </Button>
-                                <Button> 블로그 배포 </Button>
+                                <Button> 블로그 배포 ${top.openSideBar}</Button>
                                 <Button> 자동 블로그 배포 시간 설정 </Button>
                                 <Button> 배포 현황 조회 </Button>
                             </Segment>
