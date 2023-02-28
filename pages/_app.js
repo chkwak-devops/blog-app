@@ -15,7 +15,7 @@ import { Drawer } from "/src/component/drawer"
 const navLinksData = [
   { href: "/about", text: "About" },
   { href: "/main", text: "ChatGPT" },
-  { href: "/about", text: "Projects" },
+  { href: "/setting", text: "Setting" },
 ]
 
 export default function App({ Component, pageProps }) {
