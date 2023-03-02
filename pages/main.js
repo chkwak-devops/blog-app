@@ -46,6 +46,10 @@ export default function Main() {
     const [valueReqQuery, setValueReqQuery] = useState('');
     const [chatfGPTAPI, setChatfGPTAPI] = useState('');
 
+    const [imgBase64, setImgBase64] = useState([]); // 파일 base64
+    const [imgFile, setImgFile] = useState(null);
+
+
 
     const handleRunGPTAPI = async () => {
 
@@ -55,11 +59,11 @@ export default function Main() {
 
         setIsLoading(true);
 
-        const prompt_val = valueReqQuery.replace(/(?:\r\n|\r|\n)/g, ' '); // 공백 개행 처리 
+        const prompt_val = valueReqQuery.replace(/(?:\r\n|\r|\n)/g, ' '); // 공백 개행 처리     
         const response = await backendAPI.runGPTAPICall(prompt_val, gpt_api_key);
         if (response.status === 401) {
             alert('인증키가 잘못되었습니다. 인증키를 재등록해주세요')
-            // 인증키 등록용 모달 폼 생성     
+            // TODO 인증키 등록용 모달 폼 생성     
         } else {
             setChatGPTResult(response.data.choices[0].text);
         }
@@ -83,8 +87,53 @@ export default function Main() {
         element.download = fileName;
         document.body.appendChild(element); // FireFox
         element.click();
+    }
+
+
+    const handleDeployBlog = async () => {
+
+        console.log("handleDeployBlog");
+
+        //     let file = fs.readFileSync("/test.md").toString();
+        //     console.log(file);
+
+        //     var content = base64.encode(file);
+        //     console.log(content);
+
+        //     // uploadFileApi(token, content)
+
+
+        //     const github_token = "1111";
+
+        //     const data = JSON.stringify({
+        //         "message": "txt file",
+        //         "content": `${content}`
+        //     });
+
+
+        //     const config = {
+        //         method: 'put',
+        //         url: 'https://api.github.com/repos/chkwak-devops/chkwak-devops.github.io/_posts/2023-03-02-test.md',
+        //         headers: {
+        //             'Authorization': `Bearer ${github_token}`,
+        //             'Content-Type': 'application/json'
+        //         },
+        //         data: data
+        //     };
+
+        //     axios(config)
+        //         .then(function (response) {
+        //             console.log(JSON.stringify(response.data));
+        //         })
+        //         .catch(function (error) {
+        //             console.log(error);
+        //         });
 
     }
+
+
+
+
 
 
     useEffect(() => {
@@ -137,7 +186,7 @@ export default function Main() {
                         <Button onClick={() => handleDownloadChatGPT()}> 파일 다운로드 </Button>
 
                         {/* https://docs.github.com/ko/rest/repos/contents?apiVersion=2022-11-28#create-a-file */}
-                        <Button> 블로그 배포</Button>
+                        <Button onClick={() => handleDeployBlog()}> 블로그 배포</Button>
                         <Button> 자동 블로그 배포 시간 설정 </Button>
                         <Button> 배포 현황 조회 </Button>
                     </Segment>
