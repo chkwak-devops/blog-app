@@ -6,8 +6,13 @@ import base64 from 'base-64';
 export default function handler(req, res) {
 
 
+    const testMessage = "test write \n test";
 
-    let file = fs.readFileSync("test.md").toString();
+    const fineName = "test2.md";
+
+    fs.writeFileSync(fineName, testMessage);
+
+    let file = fs.readFileSync(fineName).toString();
     console.log(file);
 
     const content = base64.encode(file);
@@ -35,7 +40,7 @@ export default function handler(req, res) {
 
     const config = {
         method: 'put',
-        url: 'https://api.github.com/repos/chkwak-devops/chkwak-devops.github.io/contents/_posts/test.md',
+        url: `https://api.github.com/repos/chkwak-devops/chkwak-devops.github.io/contents/_posts/${fineName}`,
         headers: {
             'Authorization': `Bearer ${github_token}`,
             'Content-Type': 'application/json',
