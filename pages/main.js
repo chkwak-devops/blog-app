@@ -36,35 +36,32 @@ export const setOpenSideBarAction = () => {
 
 export default function Main() {
 
-    const DEFAULT_API_KEY = "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";
+    const DEFAULT_API_KEY = "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";
 
     // const gpt_api_key = "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";
-    // let gpt_api_key = typeof window !== 'undefined' ? localStorage.getItem("CHATGPT_API_KEY") : "";
+    let gpt_api_key = typeof window !== 'undefined' ? localStorage.getItem("CHATGPT_API_KEY") : "";
 
     const [isLoading, setIsLoading] = useState(true);
     const [chatGPTResult, setChatGPTResult] = useState();
     const [valueReqQuery, setValueReqQuery] = useState('');
     const [chatfGPTAPI, setChatfGPTAPI] = useState('');
-
-    const [imgBase64, setImgBase64] = useState([]); // 파일 base64
-    const [imgFile, setImgFile] = useState(null);
-
+    const [valueTopic, setValueTopic] = useState('2013 hit song');
 
 
     const handleRunGPTAPI = async () => {
 
-        alert(chatfGPTAPI);
-
-        return;
-
         setIsLoading(true);
 
         const prompt_val = valueReqQuery.replace(/(?:\r\n|\r|\n)/g, ' '); // 공백 개행 처리     
-        const response = await backendAPI.runGPTAPICall(prompt_val, gpt_api_key);
+        const response = await backendAPI.runGPTAPICall(prompt_val, DEFAULT_API_KEY);
         if (response.status === 401) {
             alert('인증키가 잘못되었습니다. 인증키를 재등록해주세요')
             // TODO 인증키 등록용 모달 폼 생성     
         } else {
+            // setChatGPTResult(response.data.choices[0].text);
+
+            let result_data = response.data.choices[0].text;
+            result_data = result_data.replace(/(?:\r\n|\r|\n)/g, ' ');
             setChatGPTResult(response.data.choices[0].text);
         }
 
@@ -93,6 +90,21 @@ export default function Main() {
     const handleDeployBlog = async () => {
 
         console.log("handleDeployBlog");
+
+        const objectWithData = { "title": valueTopic, "blog_body": chatGPTResult };
+
+
+        fetch('/api/github', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(objectWithData),
+        })
+
+
+
+
 
         //     let file = fs.readFileSync("/test.md").toString();
         //     console.log(file);
