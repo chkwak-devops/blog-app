@@ -5,7 +5,9 @@ import moment from "moment";
 
 export default function handler(req, res) {
   //   const GITHUB_API_KEY = "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";
-  const GITHUB_API_KEY = "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";
+  //   const GITHUB_API_KEY = "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";
+  const GITHUB_API_KEY = "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";
+  //git remote add origin https://chkwak-devops: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@github.com/chkwak-devops/blog-app.git
 
   if (req.method !== "POST") {
     res.status(405).send({ message: "Only POST requests allowed" });
