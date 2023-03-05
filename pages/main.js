@@ -131,49 +131,6 @@ export default function Main() {
     }
 
     setIsLoading(false);
-
-    // console.log(objectWithData);
-
-    // fetch("/api/github", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(objectWithData),
-    // });
-
-    //     let file = fs.readFileSync("/test.md").toString();
-    //     console.log(file);
-
-    //     var content = base64.encode(file);
-    //     console.log(content);
-
-    //     // uploadFileApi(token, content)
-
-    //     const github_token = "1111";
-
-    //     const data = JSON.stringify({
-    //         "message": "txt file",
-    //         "content": `${content}`
-    //     });
-
-    //     const config = {
-    //         method: 'put',
-    //         url: 'https://api.github.com/repos/chkwak-devops/chkwak-devops.github.io/_posts/2023-03-02-test.md',
-    //         headers: {
-    //             'Authorization': `Bearer ${github_token}`,
-    //             'Content-Type': 'application/json'
-    //         },
-    //         data: data
-    //     };
-
-    //     axios(config)
-    //         .then(function (response) {
-    //             console.log(JSON.stringify(response.data));
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
   };
 
   useEffect(() => {

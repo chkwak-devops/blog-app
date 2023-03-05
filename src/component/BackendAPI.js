@@ -1,6 +1,14 @@
 import Axios from "axios";
 import * as commonUtil from "/src/component/Common";
 
+export const UNSPLASH_ACCESS_KEY =
+  "Qh1nIfKS9_P30WuIRPydGyF0NPrkADn5v3Au-8uNSLA";
+export const UNSPLASH_SECRET_KEY =
+  "ub3ceP-InlG6Gz1f6XInqx0QBy-QFhIv1HfRNJXFKLw";
+
+//sample : https://api.unsplash.com/search/photos?page=1&query=house&client_id=Qh1nIfKS9_P30WuIRPydGyF0NPrkADn5v3Au-8uNSLA&per_page=2
+//참고 블로그 : https://nscworld.net/2022/04/13/unsplash-api-%ec%82%ac%ec%9a%a9%eb%b2%95-%ec%9d%b4%eb%af%b8%ec%a7%80-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0/
+
 export const runGPTAPICall = async (req_prompt, gpt_api_key) => {
   const CHATGPT_BASE_API_URL = "https://api.openai.com/v1/completions";
   let returnStr = "";
