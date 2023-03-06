@@ -4,72 +4,76 @@ import base64 from "base-64";
 import moment from "moment";
 
 export default function handler(req, res) {
-  //   const GITHUB_API_KEY = "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";
-  //   const GITHUB_API_KEY = "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";
-  const GITHUB_API_KEY = "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";
-  //git remote add origin https://chkwak-devops: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@github.com/chkwak-devops/blog-app.git
+    //   const GITHUB_API_KEY = "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";
+    //   const GITHUB_API_KEY = "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";
+    //   const GITHUB_API_KEY = "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";
+    //git remote add origin https://chkwak-devops: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@github.com/chkwak-devops/blog-app.git
 
-  if (req.method !== "POST") {
-    res.status(405).send({ message: "Only POST requests allowed" });
-    return;
-  }
 
-  const body = req.body;
-  console.log("-----------");
-  console.log(body);
-  console.log("-----------");
+    const GITHUB_TOKEN = typeof window !== 'undefined' ? localStorage.getItem("GITHUB_TOKEN") : "";
 
-  let blog_title = body.title;
-  let blog_body = body.blog_body;
+    if (req.method !== "POST") {
+        res.status(405).send({ message: "Only POST requests allowed" });
+        return;
+    }
 
-  //   let blog_title = "test-title";
-  //   let blog_body = "test-body";
+    const body = req.body;
+    console.log("-----------");
+    console.log("GITHUB_TOKEN : " + GITHUB_TOKEN);
+    console.log("body : " + body);
+    console.log("-----------");
 
-  blog_title = blog_title.replace(/\s/g, "_");
-  const file_name =
-    moment().subtract(1, "day").format("YYYY-MM-DD") + "-" + blog_title + ".md";
+    let blog_title = body.title;
+    let blog_body = body.blog_body;
 
-  fs.writeFileSync(file_name, blog_body);
+    //   let blog_title = "test-title";
+    //   let blog_body = "test-body";
 
-  let upload_file = fs.readFileSync(file_name, "utf-8").toString();
-  console.log(upload_file);
+    blog_title = blog_title.replace(/\s/g, "_");
+    const file_name =
+        moment().subtract(1, "day").format("YYYY-MM-DD") + "-" + blog_title + ".md";
 
-  const content = Buffer.from(upload_file).toString("base64");
-  //   const content = base64.encode(upload_file);
-  console.log(content);
+    fs.writeFileSync(file_name, blog_body);
 
-  const data = {
-    message: `posting ${file_name}`,
-    committer: { name: "chkwak", email: "chkwak@emart.com" },
-    content: `${content}`,
-  };
+    let upload_file = fs.readFileSync(file_name, "utf-8").toString();
+    console.log(upload_file);
 
-  const config = {
-    method: "put",
-    url: `https://api.github.com/repos/chkwak-devops/chkwak-devops.github.io/contents/_posts/${file_name}`,
-    headers: {
-      Authorization: `Bearer ${GITHUB_API_KEY}`,
-      "Content-Type": "application/json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-    data: data,
-  };
+    const content = Buffer.from(upload_file).toString("base64");
+    //   const content = base64.encode(upload_file);
+    console.log(content);
 
-  console.log("-----------------");
-  console.log(config);
-  console.log("-----------------");
+    const data = {
+        message: `posting ${file_name}`,
+        committer: { name: "chkwak", email: "chkwak@emart.com" },
+        content: `${content}`,
+    };
 
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
+    const config = {
+        method: "put",
+        url: `https://api.github.com/repos/chkwak-devops/chkwak-devops.github.io/contents/_posts/${file_name}`,
+        headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            "Content-Type": "application/json",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+        data: data,
+    };
 
-      if (fs.existsSync(file_name)) {
-        fs.unlinkSync(file_name);
-      }
-      res.status(200).json(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-      res.status(500).json(error);
-    });
+    console.log("-----------------");
+    console.log(config);
+    console.log("-----------------");
+
+    axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+
+            if (fs.existsSync(file_name)) {
+                fs.unlinkSync(file_name);
+            }
+            res.status(200).json(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.status(500).json(error);
+        });
 }
