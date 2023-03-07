@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Link from 'next/link'
 
 import Head from "next/head";
 import {
@@ -35,12 +36,6 @@ export const setOpenSideBarAction = () => {
 export default function Main() {
 
     const router = useRouter();
-    // const DEFAULT_API_KEY = "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";
-
-    // let gpt_api_key =
-    //     typeof window !== "undefined"
-    //         ? localStorage.getItem("CHATGPT_API_KEY")
-    //         : "";
 
     const blogContentsTemplate =
         "---\n" +
@@ -53,8 +48,6 @@ export default function Main() {
         "toc_label: index\n" +
         "---\n" +
         "\n";
-
-
 
     const defaultStatePromptTypeList = [{
         key: 0,
@@ -75,12 +68,11 @@ export default function Main() {
     const [blogTitle, setBlogTitle] = useState("");
     const [blogContents, setBlogContents] = useState("");
 
-
     const handleRunGPTAPI = async () => {
         console.log("handleRunGPTAPI");
 
         if (commonUtil.isEmpty(chatGptPrompt)) {
-            alert("ChatGPT 질의문을 입력해주세요");
+            alert("ChatGPT prompt(질의문)를 입력해주세요");
             document.getElementById("form_prompt").focus();
             return;
         }
@@ -88,24 +80,32 @@ export default function Main() {
         setIsLoading(true);
 
         const prompt_val = chatGptPrompt.replace(/(?:\r\n|\r|\n)/g, " "); // 공백 개행 처리
-        // const response = await backendAPI.runGPTAPICall(
-        //     prompt_val
-        // );
 
-        const response = {
-            "status": 200,
-            "data": {
-                "choices": [{
-                    "text": "대한민국의 수도는 서울이다"
-                }
+        const response = await backendAPI.runGPTAPICall(
+            prompt_val
+        );
 
-                ]
-            }
-        };
 
+
+
+
+        // const response = {
+        //     "status": 200,
+        //     "data": {
+        //         "choices": [{
+        //             "text": "대한민국의 수도는 서울이다"
+        //         }
+
+        //         ]
+        //     }
+        // };
+
+        // await commonUtil.sleep(3000);
+        setIsLoading(false);
+        await commonUtil.sleep(100);
 
         if (response.status === 401) {
-            alert("인증키가 잘못되었습니다. 인증키를 재등록해주세요");
+            alert("chatGPT API KEY가 잘못되었습니다. 인증키를 재등록해주세요");
             router.push("/setting");
 
         } else {
@@ -115,11 +115,17 @@ export default function Main() {
             const responseData = response.data.choices[0].text;
             setChatGPTResult(responseData);
 
-            const inputTitle = chatGptPrompt.substring(0, 30).concat("...");
+            const inputTitle = chatGptPrompt.length > 20 ? chatGptPrompt.substring(0, 20).concat("...") : chatGptPrompt;
             const inputContents = generateBlogContents(inputTitle, responseData);
 
             setBlogTitle(inputTitle);
             setBlogContents(inputContents);
+
+            // console.log("----------------")
+            // console.log(response.status)
+            // console.log(inputTitle)
+            // console.log(inputContents)
+            // console.log("----------------")
 
             document.getElementById("form_blog_title").value = inputTitle;
             document.getElementById("form_blog_contents").value = inputContents;
@@ -128,8 +134,6 @@ export default function Main() {
 
 
 
-
-        setIsLoading(false);
     };
 
     const handleDownloadChatGPT = async () => {
@@ -172,12 +176,21 @@ export default function Main() {
 
         console.log(reqGithubData);
 
-        const response = await backendAPI.githubAPICall(blogContents);
+        const response = await backendAPI.githubAPICall(reqGithubData);
 
-        if (response.status !== 200) {
-            alert(`${response.status}\n오류가 발생했습니다}`);
+        if (response.status === 200) {
+            alert("블로그 배포 완료되었습니다.\n잠시(약 30초) 후 배포 상태 확인할 수 있습니다");
+
+        } else if (response.status === 404) {
+            alert("github 정보가 없습니다. github 설정 메뉴에서 정보를 입력해 주세요");
+            router.push("/setting");
+
+        } else if (response.status === 401) {
+            alert("github token이 맞지 않습니다. 다시 설정해 주세요");
+            router.push("/setting");
+
         } else {
-            alert("처리 완료되었습니다.");
+            alert(`${response.status}\n오류가 발생했습니다[${response.data}]`);
         }
 
         setIsLoading(false);
@@ -258,12 +271,7 @@ export default function Main() {
 
                         <Form.Field widths="equal">
                             <label>블로그 제목 </label>
-                            <Form.Field
-                                id='form_blog_title'
-                                control={Input}
-                                placeholder="블로그 제목 입력"
-                            // value={blogTitle}
-                            />
+                            <Input id="form_blog_title" placeholder="블로그 제목 입력.." maxLength="100" />
                         </Form.Field>
                         <Form.Field widths="equal">
                             <label>블로그 본문 </label>
@@ -286,6 +294,8 @@ export default function Main() {
 
                         {/* https://docs.github.com/ko/rest/repos/contents?apiVersion=2022-11-28#create-a-file */}
                         <Button onClick={() => handleDeployBlog()}> 블로그 실시간 배포</Button>
+                        <Button onClick={() => window.open('https://chkwak-devops.github.io', '_blank')}> 블로그 바로가기 </Button>
+
                         {/* <Button> 자동 블로그 배포 시간 설정 </Button>
                         <Button> 배포 현황 조회 </Button> */}
                     </Segment>

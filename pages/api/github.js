@@ -10,8 +10,6 @@ export default function handler(req, res) {
     //git remote add origin https://chkwak-devops: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@github.com/chkwak-devops/blog-app.git
 
 
-    const GITHUB_TOKEN = typeof window !== 'undefined' ? localStorage.getItem("GITHUB_TOKEN") : "";
-
     if (req.method !== "POST") {
         res.status(405).send({ message: "Only POST requests allowed" });
         return;
@@ -19,19 +17,20 @@ export default function handler(req, res) {
 
     const body = req.body;
     console.log("-----------");
-    console.log("GITHUB_TOKEN : " + GITHUB_TOKEN);
-    console.log("body : " + body);
+    console.log("body : " + JSON.stringify(body));
     console.log("-----------");
 
     let blog_title = body.title;
     let blog_body = body.blog_body;
+    let github_token = body.github_token;
+    let github_account = body.github_account;
 
     //   let blog_title = "test-title";
     //   let blog_body = "test-body";
 
     blog_title = blog_title.replace(/\s/g, "_");
     const file_name =
-        moment().subtract(1, "day").format("YYYY-MM-DD") + "-" + blog_title + ".md";
+        moment().subtract(1, "day").format("YYYY-MM-DD") + "-" + encodeURI(blog_title) + "-" + Math.floor(Math.random() * 1000000).toString() + ".md";
 
     fs.writeFileSync(file_name, blog_body);
 
@@ -50,9 +49,9 @@ export default function handler(req, res) {
 
     const config = {
         method: "put",
-        url: `https://api.github.com/repos/chkwak-devops/chkwak-devops.github.io/contents/_posts/${file_name}`,
+        url: `https://api.github.com/repos/${github_account}/${github_account}.github.io/contents/_posts/${file_name}`,
         headers: {
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            Authorization: `Bearer ${github_token}`,
             "Content-Type": "application/json",
             "X-GitHub-Api-Version": "2022-11-28",
         },
@@ -74,6 +73,6 @@ export default function handler(req, res) {
         })
         .catch(function (error) {
             console.log(error);
-            res.status(500).json(error);
+            res.status(error.response.status).json(error.response.data.message);
         });
 }

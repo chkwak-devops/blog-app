@@ -11,6 +11,7 @@ export default function Setting() {
     const [fingerPrint, setfingerPrint] = useState();
     const [chatGptApi, setChatGptApi] = useState();
     const [githubToken, setGithubToken] = useState();
+    const [githubAccount, setGithubAccount] = useState();
 
 
     //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
@@ -38,12 +39,36 @@ export default function Setting() {
             console.log(`CHATGPT_API_KEY : ${value}`);
             localStorage.setItem("CHATGPT_API_KEY", value);
             setChatGptApi(localStorage.getItem("CHATGPT_API_KEY"));
+            document.getElementById("form_chatgpt_api_key").value = value;
 
-            alert("ChatGPT API Key 등록이 완료되었습니다");
+            // alert("ChatGPT API Key 등록이 완료되었습니다");
         }
     }
 
-    const handleGithub = (e, value) => {
+
+
+    const handleGithubAccount = (e, value) => {
+
+        if (e.code === "Enter") {
+            if (commonUtil.isEmpty(value)) {
+                alert("GitHub 계정을 입력해주세요");
+                document.getElementById("form_github_account").focus();
+                return;
+            }
+
+            console.log(`form_github_account : ${value}`);
+            localStorage.setItem("GITHUB_ACCOUNT", value);
+            setGithubAccount(localStorage.getItem("GITHUB_ACCOUNT"));
+
+            document.getElementById("form_github_account").value = value;
+
+            // alert("GITHUB 계정 등록이 완료되었습니다");
+        }
+    }
+
+
+
+    const handleGithubToken = (e, value) => {
 
         if (e.code === "Enter") {
             if (commonUtil.isEmpty(value)) {
@@ -54,20 +79,19 @@ export default function Setting() {
 
             console.log(`githubToekn : ${value}`);
             localStorage.setItem("GITHUB_TOKEN", value);
-            setChatGptApi(localStorage.getItem("GITHUB_TOKEN"));
+            setGithubToken(localStorage.getItem("GITHUB_TOKEN"));
+            document.getElementById("form_github_access_token").value = value;
 
-            alert("GITHUB TOKEN 등록이 완료되었습니다");
+            // alert("GITHUB TOKEN 등록이 완료되었습니다");
         }
     }
-
-
-
 
     useEffect(() => {
 
         getFingerPrint();
         setChatGptApi(localStorage.getItem("CHATGPT_API_KEY"));
         setGithubToken(localStorage.getItem("GITHUB_TOKEN"));
+        setGithubAccount(localStorage.getItem("GITHUB_ACCOUNT"));
 
     }, []);
 
@@ -111,20 +135,40 @@ export default function Setting() {
 
             <Message
                 attached
-                header='GITHUB ACCESS TOKEN 등록'
+                header='GITHUB 정보 등록'
                 color='teal'
                 list={[
+                    'github( https://github.com ) 사이트 접속하여 가입/로그인 합니다.',
+                    '상단 좌측 사용자 아이콘 우측에 있는 계정명을 아래 Account 입력창에 등록합니다',
+                    '상단 우측 사용자 아이콘을 클릭후 "settings > Developer Settings > Personal access tokens > Tokens " 메뉴로 이동합니다',
+                    '"Generate new token" 버튼을 클릭하여 새로운 액세스 토큰을 생성합니다. ',
+                    '생성된 Token을 복사하여 아래 Token 입력창에 붙여넣기 한 후 등록합니다'
                 ]}
             />
             <Form className='attached fluid segment'>
-                <Form.Group widths='equal'>
 
+                <Form.Group widths='equal'>
+                    <Form.Field
+                        id='form_github_account'
+                        control={Input}
+                        label='GITHUB 계정'
+                        placeholder={githubAccount}
+                        onKeyPress={(e) => handleGithubAccount(e, e.target.value)}
+                    />
+                </Form.Group>
+                <List divided selection>
+                    <List.Item>
+                        <Icon name='caret right' />{githubAccount}
+                    </List.Item>
+                </List>
+
+                <Form.Group widths='equal'>
                     <Form.Field
                         id='form_github_access_token'
                         control={Input}
                         label='GITHUB ACCESS TOKEN'
                         placeholder={githubToken}
-                        onKeyPress={(e) => handleGithub(e, e.target.value)}
+                        onKeyPress={(e) => handleGithubToken(e, e.target.value)}
                     />
                 </Form.Group>
                 <List divided selection>
@@ -134,8 +178,6 @@ export default function Setting() {
                 </List>
 
             </Form>
-
-
 
             <Divider />
 

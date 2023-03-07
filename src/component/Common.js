@@ -65,3 +65,6 @@ export const getToday = () => {
     return year + "-" + month + "-" + day;
 }
 
+
+
+export const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
