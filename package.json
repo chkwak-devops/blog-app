@@ -12,6 +12,7 @@
     "@faker-js/faker": "^7.6.0",
     "@next/font": "13.1.6",
     "base-64": "^1.0.0",
+    "dayjs": "^1.11.7",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "lowdb": "^5.1.0",
@@ -22,6 +23,7 @@
     "react-dom": "18.2.0",
     "seed-fingerprint": "^1.2.0",
     "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.4"
+    "semantic-ui-react": "^2.1.4",
+    "shortid": "^2.2.16"
   }
 }
