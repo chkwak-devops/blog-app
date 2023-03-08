@@ -16,7 +16,10 @@ import { JSONFile } from 'lowdb/node'
 
 // const __dirname = dirname(fileURLToPath(import.meta.url));
 // const file = join(__dirname, 'db.json')
-const file = 'db.json';
+// const file = join("tmp", 'db.json')
+const file = "/tmp/db.json";
+
+// const file = 'db.json';
 
 
 
