@@ -10,16 +10,8 @@ import db from '/src/component/lowdb';
 
 
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
 
-  // const __dirname = dirname(fileURLToPath(import.meta.url));
-  // const file = join(__dirname, 'db.json')
-
-  // // Configure lowdb to write to JSONFile
-  // const adapter = new JSONFile(file)
-  // const db = new Low(adapter)
-
-  console.log("---------------");
   // console.log(
   //   db.get('todos')
   //     .filter({ date: day })
@@ -31,9 +23,13 @@ export default function handler(req, res) {
     date: dayjs().format('DD.MM.YYYY'),
     done: false,
   })
-  db.write();
+  await db.write();
+
+  await db.read();
 
 
+  // const { posts } = db.data();
 
-  res.status(200).json({ name: 'John Doe' })
+
+  res.status(200).json(posts)
 }
