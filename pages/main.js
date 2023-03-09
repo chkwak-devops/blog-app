@@ -81,56 +81,51 @@ export default function Main() {
 
         const prompt_val = chatGptPrompt.replace(/(?:\r\n|\r|\n)/g, " "); // 공백 개행 처리
 
-        const response = await backendAPI.runGPTAPICall(
-            prompt_val
-        );
+        try {
+            const response = await backendAPI.runGPTAPICall(
+                prompt_val
+            );
 
 
+            setIsLoading(false);
+            await commonUtil.sleep(100);
 
+            if (response.status === 401) {
+                alert("chatGPT API KEY가 잘못되었습니다. 인증키를 재등록해주세요");
+                router.push("/setting");
 
+            } else {
+                let result_data = response.data.choices[0].text;
+                result_data = result_data.replace(/(?:\r\n|\r|\n)/g, " ");
 
-        // const response = {
-        //     "status": 200,
-        //     "data": {
-        //         "choices": [{
-        //             "text": "대한민국의 수도는 서울이다"
-        //         }
+                const responseData = response.data.choices[0].text;
+                setChatGPTResult(responseData);
 
-        //         ]
-        //     }
-        // };
+                const inputTitle = chatGptPrompt.length > 20 ? chatGptPrompt.substring(0, 20).concat("...") : chatGptPrompt;
+                const inputContents = generateBlogContents(inputTitle, responseData);
 
-        // await commonUtil.sleep(3000);
-        setIsLoading(false);
-        await commonUtil.sleep(100);
+                setBlogTitle(inputTitle);
+                setBlogContents(inputContents);
 
-        if (response.status === 401) {
-            alert("chatGPT API KEY가 잘못되었습니다. 인증키를 재등록해주세요");
-            router.push("/setting");
+                // console.log("----------------")
+                // console.log(response.status)
+                // console.log(inputTitle)
+                // console.log(inputContents)
+                // console.log("----------------")
 
-        } else {
-            let result_data = response.data.choices[0].text;
-            result_data = result_data.replace(/(?:\r\n|\r|\n)/g, " ");
+                document.getElementById("form_blog_title").value = inputTitle;
+                document.getElementById("form_blog_contents").value = inputContents;
 
-            const responseData = response.data.choices[0].text;
-            setChatGPTResult(responseData);
+            }
 
-            const inputTitle = chatGptPrompt.length > 20 ? chatGptPrompt.substring(0, 20).concat("...") : chatGptPrompt;
-            const inputContents = generateBlogContents(inputTitle, responseData);
+        } catch (error) {
 
-            setBlogTitle(inputTitle);
-            setBlogContents(inputContents);
+            console.log(error);
 
-            // console.log("----------------")
-            // console.log(response.status)
-            // console.log(inputTitle)
-            // console.log(inputContents)
-            // console.log("----------------")
-
-            document.getElementById("form_blog_title").value = inputTitle;
-            document.getElementById("form_blog_contents").value = inputContents;
-
+            alert(error);
+            return;
         }
+
 
 
 
@@ -197,21 +192,12 @@ export default function Main() {
     };
 
     const generateBlogContents = (inputTitle, inputContents) => {
-
-        const blogContents = blogContentsTemplate.replace("BLOG_TAG_TITLE", inputTitle) + inputContents;
-
-        return blogContents;
-
+        return blogContentsTemplate.replace("BLOG_TAG_TITLE", inputTitle) + inputContents;
     }
+
 
     useEffect(() => {
         setIsLoading(false);
-
-        // setChatfGPTAPI(
-        //     localStorage.getItem("CHATGPT_API_KEY") === ""
-        //         ? DEFAULT_API_KEY
-        //         : localStorage.getItem("CHATGPT_API_KEY")
-        // );
 
         setChatGPTResult("");
 
@@ -252,8 +238,8 @@ export default function Main() {
                             <Form.Field
                                 id="form_prompt"
                                 control={TextArea}
-                                label="ChatGPT Prompt"
-                                placeholder="ChatGPT 질의문 입력"
+                                label="ChatGPT 잘의(Prompt) 입력"
+                                placeholder="ChatGPT 잘의(Prompt) 입력"
                                 style={{ minHeight: 100 }}
                                 onChange={(e) => setChatGptPrompt(e.currentTarget.value)}
                                 value={chatGptPrompt}
@@ -271,7 +257,10 @@ export default function Main() {
 
                         <Form.Field widths="equal">
                             <label>블로그 제목 </label>
-                            <Input id="form_blog_title" placeholder="블로그 제목 입력.." maxLength="100" />
+                            <Input id="form_blog_title"
+                                placeholder="블로그 제목 입력.."
+                                maxLength="100"
+                            />
                         </Form.Field>
                         <Form.Field widths="equal">
                             <label>블로그 본문 </label>
@@ -298,9 +287,10 @@ export default function Main() {
 
                         {/* <Button> 자동 블로그 배포 시간 설정 </Button>
                         <Button> 배포 현황 조회 </Button> */}
-                    </Segment>
-                </div>
-            )}
-        </div>
+                    </Segment >
+                </div >
+            )
+            }
+        </div >
     );
 }

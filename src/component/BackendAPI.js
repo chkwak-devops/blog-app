@@ -30,11 +30,11 @@ export const runGPTAPICall = async (req_prompt) => {
         data: {
             model: "text-davinci-003",
             prompt: `${req_prompt}`,
-            temperature: 0.9,
-            max_tokens: 4000,
+            temperature: 0.3,
+            max_tokens: 3500,
             top_p: 1,
             frequency_penalty: 0,
-            presence_penalty: 0.6,
+            presence_penalty: 0,
             // stop: [" Human:", " AI:"],
         },
     })
@@ -42,10 +42,12 @@ export const runGPTAPICall = async (req_prompt) => {
             console.log(`response:`);
             console.log(resp);
             returnStr = resp;
+
+
         })
         .catch((ex) => {
             console.error("api requset fail: " + ex);
-            returnStr = ex.response;
+            returnStr = ex;
         })
         .finally(() => {
             console.log("api request end..");
