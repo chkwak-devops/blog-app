@@ -22,6 +22,7 @@ import {
     Sidebar,
     Menu,
     Select,
+    Label
 } from "semantic-ui-react";
 import commonStyles from "/src/component/css/Common.module.css";
 import * as backendAPI from "/src/component/BackendAPI";
@@ -49,24 +50,43 @@ export default function Main() {
         "---\n" +
         "\n";
 
+
+
+    const chatGPTPrompt1 =
+        "Write blog posts in markdown format.\n" +
+        "Write the theme of your blog as '{{0}}' and its category is '{{1}}'.\n" +
+        "Highlight, bold, or italicize important words or sentences.\n" +
+        "Please include the restaurant's address, menu recommendations and other helpful information(opening and closing hours) as a list style.\n" +
+        "Please make the entire blog less than 10 minutes long.\n" +
+        "The audience of this article is 20-40 years old.\n" +
+        "Create several hashtags and add them only at the end of the line.\n" +
+        "Add a summary of the entire article at the beginning of the blog post.";
+
     const defaultStatePromptTypeList = [{
         key: 0,
-        value: "0",
-        text: "템플릿 없음"
+        value: 0,
+        text: "직접 입력"
     }, {
         key: 1,
-        value: "1",
-        text: "맛집 블로그 유형"
-
+        value: 1,
+        text: "마크다운 포맷 한글 템플릿"
+    }, {
+        key: 2,
+        value: 2,
+        text: "마크다운 포맷 영어 템플릿"
     }
     ]
 
     const [isLoading, setIsLoading] = useState(true);
     const [statePromptTypeList, setStatePromptTypeList] = useState(defaultStatePromptTypeList);
+    const [defaultPromptType, setDefaultPromptType] = useState(0);
     const [chatGptPrompt, setChatGptPrompt] = useState("");
     const [chatGPTResult, setChatGPTResult] = useState();
+    const [blogCategory, setBlogCategory] = useState("");
     const [blogTitle, setBlogTitle] = useState("");
     const [blogContents, setBlogContents] = useState("");
+
+
 
     const handleRunGPTAPI = async () => {
         console.log("handleRunGPTAPI");
@@ -79,7 +99,7 @@ export default function Main() {
 
         setIsLoading(true);
 
-        const prompt_val = chatGptPrompt.replace(/(?:\r\n|\r|\n)/g, " "); // 공백 개행 처리
+        const prompt_val = chatGptPrompt.replace(/(?:\r\n|\r|\n)/g, " "); // 개행 공백 처리
 
         try {
             const response = await backendAPI.runGPTAPICall(
@@ -196,6 +216,46 @@ export default function Main() {
     }
 
 
+
+
+    const handlePromptTypeSelect = async (e, data) => {
+
+        if (commonUtil.isEmpty(blogCategory)) {
+            alert("blog 카테고리를 입력해주세요");
+            setDefaultPromptType(0);
+            return;
+        }
+
+        if (commonUtil.isEmpty(blogTitle)) {
+            alert("blog 제목을 입력해주세요");
+            setDefaultPromptType(0);
+            return;
+        }
+
+        const promptType = data.value;
+        console.log(`promptType : ${promptType}`);
+
+        // 직접 입력
+        if (promptType === 0) {
+            setChatGptPrompt("");
+            document.getElementById("form_prompt").focus();
+        } else if (promptType === 1) {
+
+
+            // const inputChatGPTPrompt = chatGPTPrompt1.replace("{{0}}", blogTitle).replace("{{1}}", blogCategory);
+            // chatGPTPrompt1.replace("{{0}}", blogTitle);
+            // chatGPTPrompt1.replace("{{1}}", blogCategory);
+
+            setChatGptPrompt(chatGPTPrompt1.replace("{{0}}", blogTitle).replace("{{1}}", blogCategory));
+
+
+        } else if (promptType === 2) {
+            setChatGptPrompt(chatGPTPrompt1);
+        }
+
+    }
+
+
     useEffect(() => {
         setIsLoading(false);
 
@@ -205,7 +265,7 @@ export default function Main() {
 
     return (
         <div className={commonStyles.body_layout}>
-            <PageTitle title="Blog Page Generator ChatGPT" />
+            <PageTitle title="Blog 페이지 생성기" />
             {isLoading && (
                 <div style={{ padding: "300px 0" }}>
                     <Dimmer active>
@@ -220,54 +280,78 @@ export default function Main() {
 
                 <div className={commonStyles.body_layout}>
                     <Form>
-                        <Form.Group widths="equal">
-                            <Form.Field>
-                                <label>질의 유형 선택</label>
-                                <Select
-                                    id="form_promptType"
-                                    options={statePromptTypeList}
-                                    placeholder="유형 선택"
-                                    defaultValue="0"
-                                // onChange={(e, data) => handleTeamChangeSelect(e, data)}
-                                // style={{ zIndex: 13 }}
-                                />
-                            </Form.Field>
-                        </Form.Group>
 
-                        <Form.Group widths="equal">
-                            <Form.Field
-                                id="form_prompt"
-                                control={TextArea}
-                                label="ChatGPT 잘의(Prompt) 입력"
-                                placeholder="ChatGPT 잘의(Prompt) 입력"
-                                style={{ minHeight: 100 }}
-                                onChange={(e) => setChatGptPrompt(e.currentTarget.value)}
-                                value={chatGptPrompt}
+                        <Form.Field widths="equal">
+                            <label>블로그 카테고리 </label>
+
+                            <Input id="form_blog_category"
+                                placeholder="카테고리명 입력.."
+                                maxLength="50"
+                                // onKeyPress={(e) => handleCategoryInput(e, e.target.value)}
+                                onKeyPress={(e) => setBlogCategory(e.target.value)}
+
                             />
-                        </Form.Group>
-                        <Form.Field widths="equal">
-                            <label>chatGPT 질의 결과 </label>
-                            <TextArea style={{ minHeight: 150 }}
-                                value={chatGPTResult} />
+                            <div className={commonStyles.input_bottom_comment}>
+                                예시 : "health", "다이어트" 등등
+                            </div>
                         </Form.Field>
 
-                        <Form.Field widths="equal">
-                            <Button onClick={handleRunGPTAPI}> chatGPT 질의</Button>
-                        </Form.Field>
 
                         <Form.Field widths="equal">
                             <label>블로그 제목 </label>
                             <Input id="form_blog_title"
                                 placeholder="블로그 제목 입력.."
                                 maxLength="100"
+                                // onKeyPress={(e) => handleTitleInput(e, e.target.value)}
+                                onKeyPress={(e) => setBlogTitle(e.target.value)}
+
+                            />
+                            <div className={commonStyles.input_bottom_comment}>
+                                예시 : "부산에서 사진찍기 좋은 3곳 추천", "3 recommended places to take pictures in Busan" 등등
+                            </div>
+                        </Form.Field>
+
+
+                        <Form.Field widths="equal">
+                            <label>질의 유형 선택</label>
+                            <Select
+                                id="form_promptType"
+                                options={statePromptTypeList}
+                                placeholder="유형 선택"
+                                defaultValue={defaultPromptType}
+                                onChange={(e, data) => handlePromptTypeSelect(e, data)}
+                            // style={{ zIndex: 13 }}
                             />
                         </Form.Field>
+
+                        <Form.Field
+                            id="form_prompt"
+                            control={TextArea}
+                            label="ChatGPT 질의(Prompt) 입력"
+                            placeholder="ChatGPT 질의(Prompt) 입력"
+                            style={{ minHeight: 100 }}
+                            onChange={(e) => setChatGptPrompt(e.currentTarget.value)}
+                            value={chatGptPrompt}
+                            widths="equal" />
+
+                        <Form.Field widths="equal">
+                            <Button color='blue' onClick={handleRunGPTAPI}> chatGPT 질의</Button>
+                        </Form.Field>
+
+
+                        <Form.Field widths="equal">
+                            <label>chatGPT 질의 결과 </label>
+                            <TextArea style={{ minHeight: 150 }}
+                                value={chatGPTResult} />
+                        </Form.Field>
+
+
                         <Form.Field widths="equal">
                             <label>블로그 본문 </label>
                             <TextArea
                                 id='form_blog_contents'
                                 style={{ minHeight: 300 }}
-                                placeholder="블로그 컨텐츠 입력"
+                                placeholder="블로그 본문 입력"
                             // value={blogContents}
                             />
                         </Form.Field>

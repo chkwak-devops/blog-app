@@ -76,3 +76,13 @@
     width: 2400px; 
     border: "1px solid #ddd"; 
 }
+
+
+.input_bottom_comment { 
+
+    color: #566573;
+    background-color: #F8F9F9;
+    margin-top: 3px;
+    padding: 4px;
+
+}

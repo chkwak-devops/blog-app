@@ -22,10 +22,14 @@ export const NavLinks = ({ list, verticalNavLinks }) => (
             list.map(({ href, text }, index) => (
                 <li key={index}>
                     <Link href={href} passHref>
-                        <Button primary>{text}</Button>
+                        <Button primary >{text}</Button>
                     </Link>
                 </li>
             ))}
+        <li key="100">
+            <Button warn onClick={() => window.open('https://chkwak-devops.github.io', '_blank')}>블로그 이동</Button>
+        </li>
+
     </Button.Group>
 )
 
@@ -41,6 +45,7 @@ export const Navbar = ({ setVisible, visible, list, verticalNavLinks, logo }) =>
                         <Grid.Column widescreen="6" only="computer tablet" floated="right">
                             <NavLinks list={list} />
                             {/* <NavLinks list={list} verticalNavLinks={verticalNavLinks} /> */}
+
                         </Grid.Column>
                         <Grid.Column width="10" only="mobile" floated="right">
                             <Hamburger onClick={() => setVisible(!visible)} />
