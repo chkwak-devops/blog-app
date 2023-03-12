@@ -37,7 +37,8 @@ export const setOpenSideBarAction = () => {
 
 export default function Main() {
   const router = useRouter();
-  const focusRef = useRef();
+  const blogCategoryRef = useRef();
+  const blogTitleRef = useRef();
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -101,6 +102,8 @@ export default function Main() {
     defaultStatePromptTypeList
   );
   const [defaultPromptType, setDefaultPromptType] = useState(0);
+  const [selectedPromptType, setSelectedPromptType] = useState(0);
+
   const [chatGptPrompt, setChatGptPrompt] = useState("");
   const [chatGPTResult, setChatGPTResult] = useState();
   const [blogCategory, setBlogCategory] = useState("");
@@ -239,18 +242,15 @@ export default function Main() {
   const handlePromptTypeSelect = async (e, data) => {
     if (commonUtil.isEmpty(blogCategory)) {
       alert("Blog 카테고리를 입력해주세요");
-      //   document.getElementById("form_blog_category").focus();
-      focusRef.current.focus();
-      setDefaultPromptType(0);
+      setTimeout(() => blogCategoryRef.current.focus(), 0);
+      setSelectedPromptType(0);
       return;
     }
 
     if (commonUtil.isEmpty(blogTitle)) {
       alert("Blog 제목을 입력해주세요");
-      document.getElementById("form_blog_title").focus();
-
-      alert(">>>" + document.getElementById("form_blog_title").value);
-      setDefaultPromptType(0);
+      setTimeout(() => blogTitleRef.current.focus(), 0);
+      setSelectedPromptType(0);
       return;
     }
 
@@ -262,12 +262,14 @@ export default function Main() {
       setChatGptPrompt("");
       document.getElementById("form_prompt").focus();
     } else if (promptType === 1) {
+      setSelectedPromptType(1);
       setChatGptPrompt(
         chatGPTPrompt1
           .replace("{{0}}", blogTitle)
           .replace("{{1}}", blogCategory)
       );
     } else if (promptType === 2) {
+      setSelectedPromptType(2);
       setChatGptPrompt(
         chatGPTPrompt2
           .replace("{{0}}", blogTitle)
@@ -304,13 +306,13 @@ export default function Main() {
               <Input
                 autoFocus
                 id="form_blog_category"
-                ref={focusRef}
+                ref={blogCategoryRef}
                 placeholder="카테고리명 입력.."
                 maxLength="50"
                 // onKeyPress={(e) => setBlogCategory(e.target.value)}
                 onClick={(e) => {
                   setChatGptPrompt("");
-                  setDefaultPromptType(0);
+                  setSelectedPromptType(0);
                 }}
                 onBlur={(e) => setBlogCategory(e.target.value)}
               />
@@ -323,12 +325,13 @@ export default function Main() {
               <label>Blog 제목 </label>
               <Input
                 id="form_blog_title"
+                ref={blogTitleRef}
                 placeholder="블로그 제목 입력.."
                 maxLength="100"
                 // onKeyPress={(e) => setBlogTitle(e.target.value)}
                 onClick={(e) => {
                   setChatGptPrompt("");
-                  setDefaultPromptType(0);
+                  setSelectedPromptType(0);
                 }}
                 onBlur={(e) => setBlogTitle(e.target.value)}
               />
@@ -344,6 +347,7 @@ export default function Main() {
                 id="form_promptType"
                 options={statePromptTypeList}
                 placeholder="유형 선택"
+                value={selectedPromptType}
                 defaultValue={defaultPromptType}
                 onChange={(e, data) => handlePromptTypeSelect(e, data)}
                 // style={{ zIndex: 13 }}
