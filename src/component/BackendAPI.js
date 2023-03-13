@@ -75,8 +75,6 @@ export const githubAPICall = async (data) => {
         }
     }
 
-
-
     await Axios({
         method: "POST",
         url: "/api/github",
@@ -100,3 +98,35 @@ export const githubAPICall = async (data) => {
 
     return commonUtil.isEmpty(returnStr) ? {} : returnStr;
 };
+
+
+
+
+export const lowdbRegistAPICall = async (jsonData) => {
+    let returnStr = "";
+
+
+    await Axios({
+        method: "POST",
+        url: "/api/posts",
+        headers: {
+            accept: "application/json",
+        },
+        data: jsonData,
+    })
+        .then((resp) => {
+            console.log(`response:`);
+            console.log(resp);
+            returnStr = resp;
+        })
+        .catch((ex) => {
+            console.error("api requset fail: " + ex);
+            returnStr = ex.response;
+        })
+        .finally(() => {
+            console.log("api request end..");
+        });
+
+    return commonUtil.isEmpty(returnStr) ? {} : returnStr;
+};
+

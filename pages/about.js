@@ -10,9 +10,5 @@ export default function About() {
     <div className={commonStyles.body_layout}>
       <PageTitle title="About" />
     </div>
-
   )
-
-
-
 } 
