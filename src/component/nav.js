@@ -27,7 +27,7 @@ export const NavLinks = ({ list, verticalNavLinks }) => (
                 </li>
             ))}
         <li key="100">
-            <Button warn onClick={() => window.open('https://chkwak-devops.github.io', '_blank')}>블로그 이동</Button>
+            <Button onClick={() => window.open('https://chkwak-devops.github.io', '_blank')}>블로그 이동</Button>
         </li>
 
     </Button.Group>

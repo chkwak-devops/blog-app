@@ -13,7 +13,6 @@ import {
   Icon,
   Header,
   Segment,
-  Grid,
   Search,
   Message,
   Sidebar,
@@ -35,8 +34,36 @@ import commonStyles from "/src/component/css/Common.module.css";
 export default function Home() {
 
   const router = useRouter();
-
   const [isLoading, setIsLoading] = useState(true);
+
+  TuiGrid.applyTheme("striped");
+
+  const DATA = [
+    { id: 1, text: "Editor", typeSelect: "1" },
+    { id: 2, text: "Grid", typeSelect: "3" },
+    { id: 3, text: "Chart" }
+  ];
+
+
+  const COLUMNS = [
+    { name: "id", header: "ID" },
+    { name: "text", header: "text edit", editor: "text" },
+    {
+      header: "type select",
+      name: "typeSelect",
+      formatter: "listItemText",
+      editor: {
+        type: "select",
+        options: {
+          listItems: [
+            { text: "Type 1", value: "1" },
+            { text: "Type 2", value: "2" },
+            { text: "Type 3", value: "3" }
+          ]
+        }
+      }
+    }
+  ];
 
 
   useEffect(() => {
@@ -60,9 +87,6 @@ export default function Home() {
 
       {!isLoading && (
         <div className={commonStyles.body_layout}>
-
-          test
-
         </div>
       )}
     </div>

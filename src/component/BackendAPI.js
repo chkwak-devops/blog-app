@@ -130,3 +130,31 @@ export const lowdbRegistAPICall = async (jsonData) => {
     return commonUtil.isEmpty(returnStr) ? {} : returnStr;
 };
 
+
+export const lowdbGetListsAPICall = async () => {
+    let returnStr = "";
+
+    await Axios({
+        method: "GET",
+        url: "/api/posts",
+        headers: {
+            accept: "application/json",
+        },
+        data: jsonData,
+    })
+        .then((resp) => {
+            console.log(`response:`);
+            console.log(resp);
+            returnStr = resp;
+        })
+        .catch((ex) => {
+            console.error("api requset fail: " + ex);
+            returnStr = ex.response;
+        })
+        .finally(() => {
+            console.log("api request end..");
+        });
+
+    return commonUtil.isEmpty(returnStr) ? {} : returnStr;
+};
+
