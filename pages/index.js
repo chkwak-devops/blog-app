@@ -36,8 +36,6 @@ export default function Home() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
 
-  TuiGrid.applyTheme("striped");
-
   const DATA = [
     { id: 1, text: "Editor", typeSelect: "1" },
     { id: 2, text: "Grid", typeSelect: "3" },
